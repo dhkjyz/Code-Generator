@@ -1,6 +1,6 @@
 package com.mango.generator;
 
-import com.mango.freemaker.dataModel.MainTemplateConfig;
+import com.mango.freemaker.dataModel.MainTemplateData;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -17,7 +17,7 @@ public class DynamicGenerator {
         String path = System.getProperty("user.dir"); //
         String inputPath = path + File.separator + "src/main/resources/templates/template.java.ftl";
         String outputPath = path + File.separator + "MainTemplate.java";
-        MainTemplateConfig dataObj = new MainTemplateConfig();
+        MainTemplateData dataObj = new MainTemplateData();
         dataObj.setAuthor("Mango");
         dataObj.setLoop(true);
         dataObj.setMessage("SUM:");
