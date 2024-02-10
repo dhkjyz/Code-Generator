@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 /**
- * 复制外层项目code-sample文件夹下acm-template的全部代码
+ * 通过hutool与递归思想，静态生成，外层项目code-sample文件夹下acm-template的全部代码
  */
 public class StaticFileGenerator {
     public static void main(String[] args) {
