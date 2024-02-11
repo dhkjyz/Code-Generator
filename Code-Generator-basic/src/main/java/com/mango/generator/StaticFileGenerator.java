@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 /**
- * 通过hutool与递归思想，静态生成，外层项目code-sample文件夹下acm-template的全部代码
+ * 生成静态文件
  */
 public class StaticFileGenerator {
     public static void main(String[] args) {
@@ -27,8 +27,7 @@ public class StaticFileGenerator {
     }
 
     /**
-     * 使用hutool实现复制文件夹全部文件
-     *
+     * 使用hutool拷贝目录，生成静态文件
      * @param inputPath
      * @param outputPath
      */
@@ -38,10 +37,9 @@ public class StaticFileGenerator {
 
 
     /**
-     * 使用递归思想完成文件夹复制
-     *
-     * @param inputPath
-     * @param outputPath
+     * 调用递归函数
+     * @param inputPath 文件所在路径
+     * @param outputPath 文件输出路径
      */
     public static void copyStaticFileByRecursive(String inputPath, String outputPath) {
 
@@ -54,6 +52,13 @@ public class StaticFileGenerator {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 递归函数
+     * @param inputFile
+     * @param outPutFile
+     * @throws IOException
+     */
 
     public static void RecursiveFunction(File inputFile, File outPutFile) throws IOException {
         if (inputFile.isDirectory()) {
@@ -70,16 +75,10 @@ public class StaticFileGenerator {
             }
         }
         if (inputFile.isFile()) {
-            /*
-            这行代码创建了一个目标文件的路径（destPath），它将复制的文件复制到 outputFile 的路径中，并使用 inputFile 的文件名作为目标文件的名称。
-            toPath() 方法将 outputFile 转换为 Path 对象，然后 resolve() 方法用于在此路径上附加 inputFile 的名称。
-             */
+            //这行代码创建了一个目标文件的路径（destPath），它将复制的文件复制到 outputFile 的路径中，并使用 inputFile 的文件名作为目标文件的名称。
+            //toPath() 方法将 outputFile 转换为 Path 对象，然后 resolve() 方法用于在此路径上附加 inputFile 的名称。s
             Path destPath = outPutFile.toPath().resolve(inputFile.getName());
-
-            /*
-            如果目标位置已经存在同名文件，StandardCopyOption.REPLACE_EXISTING 选项将替换目标文件。
-             */
-
+            //如果目标位置已经存在同名文件，StandardCopyOption.REPLACE_EXISTING 选项将替换目标文件。
             Files.copy(inputFile.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
 
         }
