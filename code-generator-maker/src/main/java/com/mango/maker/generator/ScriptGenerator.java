@@ -11,9 +11,13 @@ import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Set;
 
+
+/**
+ * 脚本生成器
+ */
+
 public class ScriptGenerator {
     /**
-     *
      * @param outputPath
      * @param jarPath
      * @throws IOException
@@ -21,27 +25,27 @@ public class ScriptGenerator {
     public static void doGenerate(String outputPath, String jarPath) throws IOException {
         //直接写入脚本文件
         //linux
-        StringBuilder sb =new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("#!/bin/bash").append("\n");
-        sb.append(String.format("java -jar %s \"$@\"",jarPath)).append("\n");
-        FileUtil.writeBytes(sb.toString().getBytes(StandardCharsets.UTF_8),outputPath);
+        sb.append(String.format("java -jar %s \"$@\"", jarPath)).append("\n");
+        FileUtil.writeBytes(sb.toString().getBytes(StandardCharsets.UTF_8), outputPath);
         //添加可执行权限
-        try{
-            Set<PosixFilePermission> permissions= PosixFilePermissions.fromString("rwxrwxrwx");
-            Files.setPosixFilePermissions(Paths.get(outputPath),permissions);
-        }catch (Exception e){
+        try {
+            Set<PosixFilePermission> permissions = PosixFilePermissions.fromString("rwxrwxrwx");
+            Files.setPosixFilePermissions(Paths.get(outputPath), permissions);
+        } catch (Exception e) {
 
         }
         //windows
-        sb =new StringBuilder();
+        sb = new StringBuilder();
         sb.append("@echo off").append("\n");
-        sb.append(String.format("java -jar %s %%*",jarPath)).append("\n");
-        FileUtil.writeBytes(sb.toString().getBytes(StandardCharsets.UTF_8),outputPath+".bat");
+        sb.append(String.format("java -jar %s %%*", jarPath)).append("\n");
+        FileUtil.writeBytes(sb.toString().getBytes(StandardCharsets.UTF_8), outputPath + ".bat");
 
     }
 
     public static void main(String[] args) throws IOException {
-        String outputPath = System.getProperty("user.dir")+ File.separator+ "generator";
-        doGenerate(outputPath,"");
+        String outputPath = System.getProperty("user.dir") + File.separator + "generator";
+        doGenerate(outputPath, "");
     }
 }
