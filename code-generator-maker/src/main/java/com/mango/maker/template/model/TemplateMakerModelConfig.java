@@ -3,12 +3,16 @@ package com.mango.maker.template.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 模板生成配置实体类
+ */
 
 @Data
 public class TemplateMakerModelConfig {
-    private List<ModelInfoConfig> models;
+    private List<ModelInfoConfig> models = new ArrayList<>();
     private TemplateMakerModelConfig.ModelGroupConfig modelGroupConfig;
 
     /**
@@ -24,6 +28,8 @@ public class TemplateMakerModelConfig {
         private String abbr;
         //用于替换哪些文本
         private String replaceText;
+
+
     }
 
     @Data
@@ -31,6 +37,8 @@ public class TemplateMakerModelConfig {
         private String groupKey;
         private String groupName;
         private String condition;
+        private String type;
+        private String description;
     }
 
 
