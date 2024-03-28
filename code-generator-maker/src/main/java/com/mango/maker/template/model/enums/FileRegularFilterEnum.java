@@ -2,11 +2,11 @@ package com.mango.maker.template.model.enums;
 
 public enum FileRegularFilterEnum {
 
-    START_WITH("前缀匹配","startWiths"),
-    END_WITH("后缀匹配","endWiths"),
-    CONTAINS("包含","contains"),
-    EQUALS("等于","equals"),
-    REGEX("正则匹配","regex");
+    START_WITH("前缀匹配", "startWiths"),
+    END_WITH("后缀匹配", "endWiths"),
+    CONTAINS("包含", "contains"),
+    EQUALS("等于", "equals"),
+    REGEX("正则匹配", "regex");
 
 
     private String description;

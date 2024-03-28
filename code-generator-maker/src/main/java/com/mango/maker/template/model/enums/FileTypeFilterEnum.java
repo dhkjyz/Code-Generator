@@ -9,8 +9,6 @@ public enum FileTypeFilterEnum {
     private String values;
 
 
-
-
     FileTypeFilterEnum(String description, String values) {
         this.description = description;
         this.values = values;
