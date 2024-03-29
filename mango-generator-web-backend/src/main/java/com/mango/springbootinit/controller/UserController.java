@@ -12,7 +12,7 @@ import com.mango.springbootinit.exception.ThrowUtils;
 import com.mango.springbootinit.model.dto.user.*;
 import com.mango.springbootinit.model.vo.LoginUserVO;
 import com.mango.springbootinit.model.vo.UserVO;
-import com.yupi.springbootinit.model.dto.user.*;
+
 import com.mango.springbootinit.model.entity.User;
 import com.mango.springbootinit.service.UserService;
 import lombok.extern.slf4j.Slf4j;

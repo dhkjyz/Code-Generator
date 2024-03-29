@@ -1,4 +1,4 @@
-package com.yupi.springbootinit;
+package com.mango.springbootinit;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
