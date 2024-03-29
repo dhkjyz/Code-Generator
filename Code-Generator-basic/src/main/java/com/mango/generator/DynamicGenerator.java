@@ -1,5 +1,6 @@
 package com.mango.generator;
 
+import cn.hutool.core.io.FileUtil;
 import com.mango.freemaker.dataModel.MainTemplateData;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -19,16 +20,16 @@ public class DynamicGenerator {
 
     public static void main(String[] args) throws TemplateException, IOException {
         //模版文件存放位置 在src/main/resources/templates
-        String path = System.getProperty("user.dir"); //
-        String inputPath = path + File.separator + "src/main/resources/templates/template.java.ftl";
-        String outputPath = path + File.separator + "MainTemplate.java";
+//        String path = System.getProperty("user.dir"); //
+//        String inputPath = path + File.separator + "code-sample/src/main/resources/templates/template.java.ftl";
+//        String outputPath = path + File.separator + "MainTemplate.java";
         //准备数据对象
         MainTemplateData dataObj = new MainTemplateData();
         dataObj.setAuthor("Mango");
         dataObj.setLoop(true);
         dataObj.setMessage("SUM:");
         //调用生成文件的方法
-        doGenerate(inputPath, outputPath, dataObj);
+        MainGenerator.doGeneratorStep2(dataObj);
     }
 
     /**
@@ -38,6 +39,12 @@ public class DynamicGenerator {
      * @param dataobj
      */
     public static void doGenerate(String inputPath, String outputPath, Object dataobj) throws IOException, TemplateException {
+
+        //对生成的文件修复FileNotFoundException
+        File outputFile = new File(outputPath);
+        if (!FileUtil.exist(outputFile)){
+            FileUtil.touch(outputFile);
+        }
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_31); // 创建 FreeMarker 配置对象
         //设置模板文件所在的路径 
         File templateDir = new File(inputPath).getParentFile();

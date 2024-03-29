@@ -14,7 +14,7 @@ public class ConfigCommand implements Runnable {
         //使用hutool下的反射工具库获取字段
         Field[] fields = ReflectUtil.getFields(MainTemplateData.class);
         for (Field field : fields) {
-            System.out.println(field.getName());
+            System.out.println(field.getName()+"你好 ");
             System.out.println(field.getType());
         }
     }

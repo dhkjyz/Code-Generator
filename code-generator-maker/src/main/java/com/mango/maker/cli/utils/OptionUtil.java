@@ -1,15 +1,18 @@
 package com.mango.maker.cli.utils;
 
-import java.lang.reflect.Field;
-import java.util.*;
-
 import picocli.CommandLine.Option;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class OptionUtil {
     /**
      * 处理交互式参数
-     *
+     * <p>
      * 防止在命令行终端输入参数时，用户没有带上必要的参数，从而出现报错
+     *
      * @param clazz
      * @param args
      * @return
