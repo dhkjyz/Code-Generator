@@ -1,9 +1,9 @@
 package com.mango.maker.meta.enums;
 
-public enum StateTypeEnum{
+public enum StateTypeEnum {
 
-    STATIC("静态文件","static"),
-    DYNAMIC("动态文件","dynamic");
+    STATIC("静态文件", "static"),
+    DYNAMIC("动态文件", "dynamic");
 
     StateTypeEnum(String description, String value) {
         this.description = description;

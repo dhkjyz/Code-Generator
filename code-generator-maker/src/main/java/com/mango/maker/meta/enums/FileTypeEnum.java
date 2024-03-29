@@ -2,8 +2,9 @@ package com.mango.maker.meta.enums;
 
 public enum FileTypeEnum {
 
-    DIR("文件夹","dir"),
-    FILE("文件","file");
+    DIR("文件夹", "dir"),
+    FILE("文件", "file"),
+    GROUP("文件组", "group");
 
     FileTypeEnum(String description, String value) {
         this.description = description;

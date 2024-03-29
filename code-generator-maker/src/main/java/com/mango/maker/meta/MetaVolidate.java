@@ -9,9 +9,19 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MetaVolidate {
     public static void doGenerate(Meta meta) {
+        volidateBasicMessage(meta);
+
+        volidateFileMessage(meta);
+        volidateModelMessage(meta);
+
+
+    }
+
+    private static void volidateBasicMessage(Meta meta) {
         //1.基本信息设置默认与校验
         String name = meta.getName();
         String defaultName = StrUtil.blankToDefault(name, "acm-template-pro-generator");
@@ -25,7 +35,7 @@ public class MetaVolidate {
         String defaultBasePackage = StrUtil.blankToDefault(basePackage, "com.mango");
         meta.setBasePackage(defaultBasePackage);
 
-        String version=meta.getVersion();
+        String version = meta.getVersion();
         String defaultVersion = StrUtil.blankToDefault(version, "1.0");
         meta.setVersion(defaultVersion);
 
@@ -38,21 +48,17 @@ public class MetaVolidate {
         Date date = new Date();
         String defaultDate = StrUtil.blankToDefault(createTime, date.toString());
         meta.setCreateTime(defaultDate);
-
-        volidateFileMessage(meta);
-        volidateModelMessage(meta);
-
-
     }
+
     private static void volidateFileMessage(Meta meta) {
         //2 验证fileConfig
         Meta.FileConfigDTO fileConfig = meta.getFileConfig();
-        if (fileConfig==null){
+        if (fileConfig == null) {
             return;
         }
         String sourceRootPath = fileConfig.getSourceRootPath();
-        if (StrUtil.isBlank(sourceRootPath)){
-            throw new RuntimeException("sourceRootPath不能为空");
+        if (StrUtil.isBlank(sourceRootPath)) {
+            throw new MetaException("sourceRootPath不能为空");
         }
 
         String inputRootPath = fileConfig.getInputRootPath();
@@ -69,48 +75,61 @@ public class MetaVolidate {
         fileConfig.setType(defaultFileConfigType);
 
         List<Meta.FileConfigDTO.FileInfo> files = fileConfig.getFiles();
-        String inputPath;
-        String outputPath;
+
         for (Meta.FileConfigDTO.FileInfo fileInfo : files) {
-            inputPath = fileInfo.getInputPath();
-            if (StrUtil.isBlank(inputPath)){
+
+            String groupKey = fileInfo.getGroupKey();
+            if (groupKey != null) {
+                continue;
+            }
+            String inputPath = fileInfo.getInputPath();
+            if (fileInfo.getType() != FileTypeEnum.GROUP.getValue() && StrUtil.isBlank(inputPath)) {
                 throw new RuntimeException("inputPath不能为空");
             }
-            outputPath = fileInfo.getOutputPath();
+
+            String outputPath = fileInfo.getOutputPath();
             String defaultoutputPath = StrUtil.blankToDefault(outputPath, inputPath);
             fileInfo.setOutputPath(defaultoutputPath);
             //todo inputPath 有文件后缀如java为file，否则为dir
             String suffix = FileUtil.getSuffix(inputPath);
-            String fileType =fileInfo.getType();
-            if (suffix==null){
-                StrUtil.blankToDefault(fileType,FileTypeEnum.DIR.getValue());
-            }else{
-                StrUtil.blankToDefault(fileType,FileTypeEnum.FILE.getValue());
+            String fileType = fileInfo.getType();
+            if (suffix == null) {
+                StrUtil.blankToDefault(fileType, FileTypeEnum.DIR.getValue());
+            } else {
+                StrUtil.blankToDefault(fileType, FileTypeEnum.FILE.getValue());
             }
 
             String generateType = fileInfo.getGenerateType();
-            if ("ftl".equals(suffix)){
+            if ("ftl".equals(suffix)) {
                 fileInfo.setGenerateType(StateTypeEnum.DYNAMIC.getValue());
-            }else{
+            } else {
                 fileInfo.setGenerateType(StateTypeEnum.STATIC.getValue());
             }
         }
     }
 
     private static void volidateModelMessage(Meta meta) {
-        List<Meta.ModelConfigDTO.ModelInfo> models = meta.getModelConfig().getModels();
-        for (Meta.ModelConfigDTO.ModelInfo modelInfo : models) {
+        List<Meta.ModelConfigDTO.ModelInfo> modelList = meta.getModelConfig().getModels();
+        for (Meta.ModelConfigDTO.ModelInfo modelInfo : modelList) {
             String fieldName = modelInfo.getFieldName();
-            if (StrUtil.isBlank(fieldName)){
+            String groupKey = modelInfo.getGroupKey();
+
+            /**
+             *
+             */
+            if (StrUtil.isNotEmpty(groupKey)) {
+                List<Meta.ModelConfigDTO.ModelInfo> subModelList = modelInfo.getModels();
+                String allArgStr = modelInfo.getModels().stream()
+                        .map(subModelInfo -> String.format("\"--%s\"", subModelInfo.getFieldName()))
+                        .collect(Collectors.joining(","));
+
+                modelInfo.setAllArgsStr(allArgStr);
+                continue;
+            }
+            if (StrUtil.isBlank(fieldName)) {
                 throw new MetaException("fieldName不能为空");
             }
         }
     }
 
-
-
-    public static void main(String[] args) {
-        Object date =new Date();
-        System.out.println(date.toString());
-    }
 }

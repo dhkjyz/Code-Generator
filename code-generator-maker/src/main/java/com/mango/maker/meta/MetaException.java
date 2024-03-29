@@ -1,6 +1,6 @@
 package com.mango.maker.meta;
 
-public class MetaException extends RuntimeException{
+public class MetaException extends RuntimeException {
 
     private String text;
 
