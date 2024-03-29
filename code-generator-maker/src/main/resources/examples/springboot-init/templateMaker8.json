@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "fileConfig": {
+    "files": [
+      {
+        "path": "src/main/java/com/yupi/springboot/init/model/dto/post/PostEsDTO.java",
+        "condition": "needPost && needES"
+      }
+
+    ]
+  },
+  "modelConfig": {
+    "models": [
+      {
+        "fieldName" : "needRS",
+        "type" : "boolean",
+        "description" : "是否开启Es功能",
+        "defaultValue": true
+      }
+    ]
+  }
+}

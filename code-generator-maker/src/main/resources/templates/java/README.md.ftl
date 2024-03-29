@@ -19,21 +19,41 @@ generator <命令> <选项参数>
         示例命令：
 
         ```
-        generator generate <#list modelConfig.models as modelInfo>-${modelInfo.abbr} </#list>
+        generator generate <#list modelConfig.models as modelInfo><#if modelInfo.groupKey?? > <#else> -abbr没有</#if> </#list>
         ```
 
         ## 参数说明
 
         <#list modelConfig.models as modelInfo>
-        ${modelInfo?index + 1}）${modelInfo.fieldName}
 
-        类型：${modelInfo.type}
+         <#if modelInfo.groupKey??>
+               <#list modelInfo.models as subModelInfo>
+                       所属:${modelInfo.groupName}
 
-        描述：${modelInfo.description}
+                       ${subModelInfo?index + 1}）${subModelInfo.fieldName}
 
-        默认值：${modelInfo.defaultValue?c}
+                       类型：${subModelInfo.type}
 
-        缩写： -${modelInfo.abbr}
+                       描述：${subModelInfo.description}
+
+                       默认值：${subModelInfo.defaultValue?c}
+
+
+
+               </#list>
+
+         <#else>
+                 ${modelInfo?index + 1}）${modelInfo.fieldName}
+
+                 类型：${modelInfo.type}
+
+                 描述：${modelInfo.description}
+
+                 默认值：${modelInfo.defaultValue?c}
+
+
+         </#if>
+
 
 
 </#list>
