@@ -1,6 +1,67 @@
 
-
 declare namespace API {
+
+
+
+  type BaseResponseGeneratorVO_ = {
+    code?: number;
+    data?: GeneratorVO;
+    message?: string;
+  };
+
+  type BaseResponseLoginUserVO_ = {
+    code?: number;
+    data?: LoginUserVO;
+    message?: string;
+  };
+
+  type BaseResponseLong_ = {
+    code?: number;
+    data?: string;
+    message?: string;
+  };
+
+  type BaseResponsePageGenerator_ = {
+    code?: number;
+    data?: PageGenerator_;
+    message?: string;
+  };
+
+  type BaseResponsePageGeneratorVO_ = {
+    code?: number;
+    data?: PageGeneratorVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageUser_ = {
+    code?: number;
+    data?: PageUser_;
+    message?: string;
+  };
+
+  type BaseResponsePageUserVO_ = {
+    code?: number;
+    data?: PageUserVO_;
+    message?: string;
+  };
+
+  type BaseResponseString_ = {
+    code?: number;
+    data?: string;
+    message?: string;
+  };
+
+  type BaseResponseUser_ = {
+    code?: number;
+    data?: User;
+    message?: string;
+  };
+
+  type BaseResponseUserVO_ = {
+    code?: number;
+    data?: UserVO;
+    message?: string;
+  };
   type BaseResponseBoolean = {
     code?: number;
     data?: boolean;
@@ -46,9 +107,6 @@ declare namespace API {
     message?: string;
   };
 
-
-
-
   type BaseResponsePageGenerator = {
     code?: number;
     data?: PageGenerator;
@@ -62,11 +120,6 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseString = {
-    code?: number;
-    data?: string;
-    message?: string;
-  };
 
   type BaseResponseUser = {
     code?: number;
@@ -123,10 +176,6 @@ declare namespace API {
   type getGeneratorVOByIdParams={
     id:string
   }
-
-
-
-
 
   type LoginUserVO = {
     id?: string;
@@ -229,12 +278,20 @@ declare namespace API {
   };
 
 
-  type BaseResponseString_ = {
+//region base
+
+
+
+//region baseMessage
+  type BaseResponseString = {
     code?: number;
     data?: string;
     message?: string;
   };
+//endregion
 
+
+//region User的字段属性
   type User = {
     id?: string;
     userAccount?: string;
@@ -250,24 +307,6 @@ declare namespace API {
     isDelete?: number;
   };
 
-  type Generator = {
-    id?: string;
-    name?: string;
-    description?: string;
-    backPackage?:string;
-    version?:number;
-    author?:string;
-    tags?:string;
-    picture?:string;
-    fileConfig?:string;
-    modelConfig?:string;
-    distpath?:string;
-    status?:number;
-    userId?:string;
-    isdelete?: number;
-
-  };
-
   type UserAddRequest = {
     userName?: string;
     userAccount?: string;
@@ -275,74 +314,16 @@ declare namespace API {
     userRole?: string;
   };
 
-  type userLoginByWxOpenParams = {
-    code: string;
-  };
-
   type UserLoginRequest = {
     userAccount?: string;
     userPassword?: string;
   };
-
-  type UserQueryRequest = {
-    current?: string;
-    pageSize?: string;
-    sortField?: string;
-    sortOrder?: string;
-    id?: string;
-    unionId?: string;
-    mpOpenId?: string;
-    userName?: string;
-    userProfile?: string;
-    userRole?: string;
-  };
-
-  type GeneratorQueryRequest={
-    current?: string;
-    pageSize?: string;
-    sortField?: string;
-    sortOrder?: string;
-    id?: string;
-    name?: string;
-    description?: string;
-    tags?:string[];
-  }
-
 
   type UserRegisterRequest = {
     userAccount?: string;
     userPassword?: string;
     checkPassword?: string;
   };
-
-  type UserUpdateMyRequest = {
-    userName?: string;
-    userAvatar?: string;
-    userProfile?: string;
-  };
-
-  type GeneratorUpdateMyRequest = {
-    name?: string;
-    description?: string;
-    backPackage?:string;
-    version?:number;
-    picture?:string;
-    tags?:string[];
-    fileConfig?:string;
-    modelConfig?:string;
-  };
-
-  type GeneratorUpdateRequest = {
-    name?: string;
-    description?: string;
-    backPackage?:string;
-    version?:number;
-    picture?:string;
-    tags?:string[];
-    fileConfig?:string;
-    modelConfig?:string;
-  };
-
   type  UserUpdateRequest = {
     id?: string;
     userName?: string;
@@ -360,30 +341,170 @@ declare namespace API {
     createTime?: string;
   };
 
-
-  type GeneratorVO = {
+  type UserQueryRequest = {
+    current?: string;
+    pageSize?: string;
+    sortField?: string;
+    sortOrder?: string;
     id?: string;
-    name?:string;
-    description?: string;
-    author?:string;
-    tags?:string[];
-    picture?:string;
-    createTime?: string;
-    user?:UserVO;
+    unionId?: string;
+    mpOpenId?: string;
+    userName?: string;
+    userProfile?: string;
+    userRole?: string;
+  };
+//endregion
+
+//region Meta的字段属性
+  type FileConfig = {
+    files?: FileInfo[];
+    inputRootPath?: string;
+    outputRootPath?: string;
+    sourceRootPath?: string;
+    type?: string;
   };
 
-  //todo 前端生成器的类型定义，需要根据实际情况修改
-  type GeneratorAddRequest = {
-    name?: string;
+  type FileInfo = {
+    condition?: string;
+    files?: FileInfo[];
+    generateType?: string;
+    groupKey?: string;
+    groupName?: string;
+    inputPath?: string;
+    outputPath?: string;
+    type?: string;
+  };
+
+  type ModelConfig = {
+    models?: ModelInfo[];
+  };
+
+  type ModelInfo = {
+    abbr?: string;
+    allArgsStr?: string;
+    condition?: string;
+    defaultValue?: Record<string, any>;
     description?: string;
-    backPackage?:string;
-    version?:number;
-    picture?:string;
-    tags?:string[];
-    fileConfig?:string;
-    modelConfig?:string;
-    status?:number;
-    dispatch?:string
-  }
+    fieldName?: string;
+    groupKey?: string;
+    groupName?: string;
+    models?: ModelInfo[];
+    type?: string;
+  };
+//endregion
+
+//region  生成器的请求字段
+  type Generator = {
+    author?: string;
+    basePackage?: string;
+    createTime?: string;
+    description?: string;
+    distPath?: string;
+    fileConfig?: string;
+    id?: string;
+    isDelete?: number;
+    modelConfig?: string;
+    name?: string;
+    picture?: string;
+    status?: number;
+    tags?: string;
+    updateTime?: string;
+    userId?: string;
+    version?: string;
+  };
+
+  type GeneratorVO = {
+    author?: string;
+    basePackage?: string;
+    createTime?: string;
+    description?: string;
+    distPath?: string;
+    fileConfig?: FileConfig;
+    id?: string;
+    modelConfig?: ModelConfig;
+    name?: string;
+    picture?: string;
+    status?: number;
+    tags?: string[];
+    updateTime?: string;
+    user?: UserVO;
+    userId?: string;
+    version?: string;
+  };
+
+   type GeneratorAddRequest = {
+      author?: string;
+      basePackage?: string;
+      description?: string;
+      distPath?: string;
+      fileConfig?: FileConfig;
+      modelConfig?: ModelConfig;
+      name?: string;
+      picture?: string;
+      status?: number;
+      tags?: string[];
+      version?: string;
+    };
+  type GeneratorEditRequest = {
+    author?: string;
+    basePackage?: string;
+    description?: string;
+    distPath?: string;
+    fileConfig?: FileConfig;
+    id?: string;
+    modelConfig?: ModelConfig;
+    name?: string;
+    picture?: string;
+    tags?: string[];
+    version?: string;
+  };
+  type GeneratorMakeRequest = {
+    meta?: Meta;
+    zipFilePath?: string;
+  };
+
+  type GeneratorQueryRequest = {
+    author?: string;
+    basePackage?: string;
+    current?: number;
+    description?: string;
+    distPath?: string;
+    id?: string;
+    name?: string;
+    notId?: string;
+    orTags?: string[];
+    pageSize?: number;
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    tags?: string[];
+    userId?: string;
+    version?: string;
+  };
+
+  type GeneratorUpdateRequest = {
+    author?: string;
+    basePackage?: string;
+    description?: string;
+    distPath?: string;
+    fileConfig?: FileConfig;
+    id?: string;
+    modelConfig?: ModelConfig;
+    name?: string;
+    picture?: string;
+    status?: number;
+    tags?: string[];
+    version?: string;
+  };
+
+  type GeneratorUseRequest = {
+    dataModel?: Record<string, any>;
+    id?: string;
+  };
+
+
+
+//endregion
 
 }

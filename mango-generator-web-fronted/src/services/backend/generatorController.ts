@@ -86,24 +86,10 @@ export async function updateGenerator(body: API.GeneratorUpdateRequest, options?
   });
 }
 
-/** 此处后端没有提供注释 POST /generator/update/my */
-//todo 后端没有相对应的接口
-export async function updateMyGenerator(
-  body: API.GeneratorUpdateMyRequest,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseBoolean>('/generator/update/my', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: body,
-    ...(options || {}),
-  });
-}
+
 
   /** 此处后端没有提供注释 POST /generator/list/page */
-  export async function listGeneratorByPage(body: API.UserQueryRequest, options?: { [key: string]: any }) {
+  export async function listGeneratorByPage(body: API.GeneratorQueryRequest, options?: { [key: string]: any }) {
     return request<API.BaseResponsePageGenerator>('/generator/list/page', {
       method: 'POST',
       headers: {
