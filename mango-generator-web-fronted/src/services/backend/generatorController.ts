@@ -101,4 +101,16 @@ export async function updateGenerator(body: API.GeneratorUpdateRequest, options?
   }
 
 
+export async function EditGenerate(body: API.GeneratorEditRequest, options?: { [key: string]: any }) {
+  return request<API.BaseResponseGeneratorVO_>('/generator/edit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+
 

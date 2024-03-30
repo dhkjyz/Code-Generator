@@ -129,7 +129,7 @@ declare namespace API {
 
   type BaseResponseGenerator = {
     code?: number;
-    data?: User;
+    data?: Generator;
     message?: string;
   };
 
