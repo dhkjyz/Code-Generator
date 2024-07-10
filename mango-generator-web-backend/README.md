@@ -1,6 +1,6 @@
-# SpringBoot 项目初始模板
+# 鱼籽代码生成器 web 后端
 
-> 作者：[程序员mango](https://github.com/liyupi)
+> 作者：[程序员鱼皮](https://github.com/liyupi)
 > 仅分享于 [编程导航知识星球](https://yupi.icu)
 
 基于 Java SpringBoot 的项目初始模板，整合了常用框架和主流业务的示例代码。
@@ -32,7 +32,6 @@
 
 - Easy Excel 表格处理
 - Hutool 工具库
-- Gson 解析库
 - Apache Commons Lang3 工具类
 - Lombok 注解
 
@@ -74,7 +73,7 @@
 
 ## 快速上手
 
-> 所有需要修改的地方mango都标记了 `todo`，便于大家找到修改的位置~
+> 所有需要修改的地方鱼皮都标记了 `todo`，便于大家找到修改的位置~
 
 ### MySQL 数据库
 

@@ -1,8 +1,0 @@
-{
-  "id": 1,
-  "meta": {
-    "name": "springboot-template",
-    "description": "springboot项目模版生成器"
-  },
-  "originProjectPath": "../../../code-sample/springboot-init"
-}
